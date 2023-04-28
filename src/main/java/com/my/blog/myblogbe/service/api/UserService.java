@@ -1,6 +1,5 @@
 package com.my.blog.myblogbe.service.api;
 
-import com.my.blog.myblogbe.database.entity.UserEntity;
 import com.my.blog.myblogbe.service.model.SecurityUserModel;
 import com.my.blog.myblogbe.service.model.UserModel;
 
@@ -23,11 +22,12 @@ public interface UserService {
   UserModel registerUser(UserModel userModel);
 
   /**
-   * Test method
+   * Update user.
    *
-   * @return User entity of created test user.
+   * @param userModel UserModel with credentials.
+   * @return UserModel of updated user.
    */
-  UserEntity createTestUser();
+  UserModel updateUser(UserModel userModel);
 
   /**
    * Check if password is correct.
@@ -59,4 +59,11 @@ public interface UserService {
    * @return true or false.
    */
   boolean userExistByEmail(String email);
+
+  /**
+   * Get authenticated user from spring context.
+   *
+   * @return UserModel.
+   */
+  UserModel getAuthenticatedUser();
 }

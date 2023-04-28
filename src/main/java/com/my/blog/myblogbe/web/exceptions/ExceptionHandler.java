@@ -1,8 +1,8 @@
 package com.my.blog.myblogbe.web.exceptions;
 
-
 import com.my.blog.myblogbe.web.dto.response.ApplicationExceptionResponseDto;
 import com.my.blog.myblogbe.web.exceptions.model.AbstractAnteikuException;
+import com.my.blog.myblogbe.web.exceptions.model.DataNotFoundException;
 import com.my.blog.myblogbe.web.exceptions.model.IncorrectCredentialsException;
 import com.my.blog.myblogbe.web.exceptions.model.JwtAuthenticationException;
 import com.my.blog.myblogbe.web.exceptions.model.UserNotActivatedException;
@@ -18,8 +18,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class ExceptionHandler {
-  private static final Map<String, String> CONSTRAINS_MAP =
-      Map.of("Email already exist", "Ключ \"(email)=");
+  private static final Map<Map<String, String>, String> CONSTRAINS_MAP =
+      Map.of(
+          Map.of("email", "Email already exist"),
+          "Ключ \"(email)=",
+          Map.of("postId", "Post not found"),
+          "Ключ (post_id)");
 
   /**
    * @param exception - MethodArgumentNotValidException
@@ -43,24 +47,26 @@ public class ExceptionHandler {
   public ResponseEntity<ApplicationExceptionResponseDto> handleException(
       DataIntegrityViolationException exception) {
     String rootMsg = exception.getRootCause().getMessage();
-    StringBuilder error = new StringBuilder();
+    Map<String, String> errors = new HashMap<>();
     if (rootMsg != null) {
-      for (Map.Entry<String, String> entry : CONSTRAINS_MAP.entrySet()) {
+      for (Map.Entry<Map<String, String>, String> entry : CONSTRAINS_MAP.entrySet()) {
         if (rootMsg.contains(entry.getValue())) {
-          error.append(entry.getKey());
-        } else {
-          error.append("Unknown data operation error, please contact support");
+          Map.Entry<String, String> errorsMap = entry.getKey().entrySet().iterator().next();
+          errors.put(errorsMap.getKey(), errorsMap.getValue());
         }
       }
     }
+    if (errors.isEmpty())
+      errors.put("unknownError", "Unknown data operation error, please contact support");
     return buildResponseDtoAndGetResponseEntity(
-        "Data operation error", HttpStatus.CONFLICT, Map.of("error", error.toString()));
+        "Data operation error", HttpStatus.CONFLICT, errors);
   }
 
   @org.springframework.web.bind.annotation.ExceptionHandler({
     IncorrectCredentialsException.class,
     JwtAuthenticationException.class,
-    UserNotActivatedException.class
+    UserNotActivatedException.class,
+    DataNotFoundException.class
   })
   public <T extends AbstractAnteikuException>
       ResponseEntity<ApplicationExceptionResponseDto> handleException(T exception) {

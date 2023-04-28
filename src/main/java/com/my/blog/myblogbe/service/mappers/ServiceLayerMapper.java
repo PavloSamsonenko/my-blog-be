@@ -1,11 +1,18 @@
 package com.my.blog.myblogbe.service.mappers;
 
-
 import com.my.blog.myblogbe.database.entity.UserEntity;
+import com.my.blog.myblogbe.database.entity.posts.CommentaryEntity;
+import com.my.blog.myblogbe.database.entity.posts.PostEntity;
 import com.my.blog.myblogbe.service.model.SecurityUserModel;
 import com.my.blog.myblogbe.service.model.UserModel;
+import com.my.blog.myblogbe.service.model.post.CommentaryModel;
+import com.my.blog.myblogbe.service.model.post.PostModel;
+import java.util.List;
+import org.mapstruct.BeanMapping;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
@@ -24,6 +31,14 @@ public interface ServiceLayerMapper {
   SecurityUserModel userEntityToSecurityUserModel(UserEntity userEntity);
 
   /**
+   * SecurityUserModel to UserModel mapper.
+   *
+   * @param securityUserModel SecurityUserModel.
+   * @return SecurityUserModel.
+   */
+  UserModel securityUserModelToModel(SecurityUserModel securityUserModel);
+
+  /**
    * UserEntity to UserModel mapper.
    *
    * @param userEntity UserEntity.
@@ -40,10 +55,51 @@ public interface ServiceLayerMapper {
   UserEntity userModelToEntity(UserModel userModel);
 
   /**
-   * SecurityUserModel to UserModel mapper.
+   * Update UserEntity From UserModel.
    *
-   * @param securityUserModel SecurityUserModel.
-   * @return UserModel.
+   * @param userModel UserModel.
+   * @return UserEntity.
    */
-  UserModel securityUserModelToUserModel(SecurityUserModel securityUserModel);
+  @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+  UserEntity updateUserEntityFromModel(UserModel userModel, @MappingTarget UserEntity userEntity);
+
+  /**
+   * PostEntity to PostModel.
+   *
+   * @param postEntity PostEntity.
+   * @return PostModel.
+   */
+  PostModel postEntityToModel(PostEntity postEntity);
+
+  /**
+   * List of PostEntity to List of PostModel.
+   *
+   * @param postEntity PostEntity.
+   * @return List of PostModel.
+   */
+  List<PostModel> postEntitiesToModels(List<PostEntity> postEntity);
+
+  /**
+   * CommentaryModel to CommentaryEntity.
+   *
+   * @param commentaryModel CommentaryModel.
+   * @return CommentaryEntity.
+   */
+  CommentaryEntity commentaryModelToEntity(CommentaryModel commentaryModel);
+
+  /**
+   * CommentaryEntity to Commentary.
+   *
+   * @param commentaryEntity CommentaryEntity.
+   * @return Commentary.
+   */
+  CommentaryModel commentaryEntityToModel(CommentaryEntity commentaryEntity);
+
+  /**
+   * List of CommentaryEntity to List of Commentary.
+   *
+   * @param commentaryEntities List of CommentaryEntity.
+   * @return List of Commentary.
+   */
+  List<CommentaryModel> commentaryEntitiesToModels(List<CommentaryEntity> commentaryEntities);
 }

@@ -44,12 +44,17 @@ public class JwtServiceImpl implements JwtService {
   public String createJwt(String email, JwtTypeEnum type) {
     try {
       Date now = new Date();
+      Date expDate =
+          new Date(
+              type.equals(JwtTypeEnum.AUTHORIZATION)
+                  ? (now.getTime() + 1000 * 60 * 60 * 24 * 10) // expires in 10 days
+                  : (now.getTime() + 1000 * 60 * 10)); // expires in 10 minutes
 
       JWTClaimsSet claims =
           new JWTClaimsSet.Builder()
               .claim("email", email)
               .claim("type", type)
-              .expirationTime(new Date(now.getTime() + 1000 * 60 * 24 * 10)) // expires in 10 days
+              .expirationTime(expDate)
               .notBeforeTime(now)
               .build();
 
@@ -64,7 +69,7 @@ public class JwtServiceImpl implements JwtService {
       return jweObject.serialize();
     } catch (JOSEException e) {
       throw new JwtAuthenticationException(
-          Map.of("jwt_unknown", "Jwt creation error"), "Jwt unknown error");
+          Map.of("token", "Jwt creation error"), "Jwt unknown error");
     }
   }
 
@@ -96,10 +101,14 @@ public class JwtServiceImpl implements JwtService {
     try {
       return jwtProcessor.process(jwt, null);
     } catch (BadJOSEException e) {
-      throw new JwtAuthenticationException(Map.of("token", e.getMessage()), "Jwt error");
+      throw new JwtAuthenticationException(
+          Map.of(
+              "token",
+              (e.getMessage().equals("Expired JWT")) ? "Link expired" : "Jwt verification error"),
+          "Jwt error");
     } catch (ParseException | JOSEException e) {
       throw new JwtAuthenticationException(
-          Map.of("jwt_unknown", "Jwt verification error"), "Jwt unknown error");
+          Map.of("token", "Jwt verification error"), "Jwt unknown error");
     }
   }
 }

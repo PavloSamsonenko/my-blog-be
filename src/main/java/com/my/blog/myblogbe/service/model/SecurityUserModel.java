@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class SecurityUserModel implements UserDetails {
   private String id;
   private String email;
+  private String username;
   private String password;
   private Boolean enabled;
   private LocalDateTime createdOn;
@@ -34,7 +35,7 @@ public class SecurityUserModel implements UserDetails {
 
   @Override
   public String getUsername() {
-    return null;
+    return username;
   }
 
   @Override

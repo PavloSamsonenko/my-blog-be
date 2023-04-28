@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserModelResponseDto {
+public class UserResponseDto {
   private String email;
-  private Boolean enabled;
+  private String username;
   private LocalDateTime createdOn;
 }

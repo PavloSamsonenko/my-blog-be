@@ -5,9 +5,13 @@ import com.my.blog.myblogbe.service.api.JwtService;
 import com.my.blog.myblogbe.service.api.UserService;
 import com.my.blog.myblogbe.service.model.UserModel;
 import com.my.blog.myblogbe.service.model.enums.JwtTypeEnum;
-import com.my.blog.myblogbe.web.dto.request.AccountCredentialsRequestDto;
-import com.my.blog.myblogbe.web.dto.request.AccountEmailRequestDto;
-import com.my.blog.myblogbe.web.dto.response.AccountRegistrationResponseDto;
+import com.my.blog.myblogbe.web.dto.request.account.AccountChangePasswordRequestDto;
+import com.my.blog.myblogbe.web.dto.request.account.AccountCredentialsRequestDto;
+import com.my.blog.myblogbe.web.dto.request.account.AccountEmailRequestDto;
+import com.my.blog.myblogbe.web.dto.request.account.AccountLoginRequestDto;
+import com.my.blog.myblogbe.web.dto.response.AuthorizationTokenResponseDto;
+import com.my.blog.myblogbe.web.dto.response.UserResponseDto;
+import com.my.blog.myblogbe.web.exceptions.model.JwtAuthenticationException;
 import com.my.blog.myblogbe.web.mappers.WebLayerMapper;
 import jakarta.validation.Valid;
 import java.util.Map;
@@ -36,17 +40,13 @@ public class AccountsController {
    * @return AccountRegistrationResponseDto.
    */
   @PostMapping("/register")
-  public ResponseEntity<AccountRegistrationResponseDto> registerAccount(
+  public ResponseEntity<UserResponseDto> registerAccount(
       @RequestBody @Valid AccountCredentialsRequestDto requestDto) {
     UserModel userModel =
         userService.registerUser(WebLayerMapper.I.accountCredentialsRequestDtoToUser(requestDto));
     gmailService.sendAccountActivationLink(userModel);
     return ResponseEntity.status(HttpStatus.CREATED)
-        .body(
-            AccountRegistrationResponseDto.builder()
-                .user(WebLayerMapper.I.userModelToResponseDto(userModel))
-                .jwt(jwtService.createJwt(userModel.getEmail(), JwtTypeEnum.AUTHORIZATION))
-                .build());
+        .body(WebLayerMapper.I.userModelToResponseDto(userModel));
   }
 
   /**
@@ -56,16 +56,15 @@ public class AccountsController {
    * @return Authorization jwt token.
    */
   @PostMapping("/login")
-  public ResponseEntity<Map<String, String>> loginInAccount(
-      @RequestBody @Valid AccountCredentialsRequestDto requestDto) {
-    userService.isCorrectPassword(WebLayerMapper.I.accountCredentialsRequestDtoToUser(requestDto));
+  public ResponseEntity<AuthorizationTokenResponseDto> loginInAccount(
+      @RequestBody @Valid AccountLoginRequestDto requestDto) {
+    userService.isCorrectPassword(WebLayerMapper.I.accountLoginRequestDtoToUser(requestDto));
 
     return ResponseEntity.ok(
-        Map.of(
-            "authorization token",
-            jwtService.createJwt(
-                WebLayerMapper.I.accountCredentialsRequestDtoToUser(requestDto).getEmail(),
-                JwtTypeEnum.AUTHORIZATION)));
+        AuthorizationTokenResponseDto.builder()
+            .authorizationToken(
+                jwtService.createJwt(requestDto.getEmail(), JwtTypeEnum.AUTHORIZATION))
+            .build());
   }
 
   /**
@@ -77,9 +76,10 @@ public class AccountsController {
   @PostMapping("/email/activation/{activationToken}")
   public ResponseEntity<HttpStatus> activateAccount(
       @PathVariable(value = "activationToken") String activationToken) {
-    if (jwtService.isEmailActivationToken(activationToken)) {
-      userService.activateUserByEmail(jwtService.getEmailFromJwt(activationToken));
+    if (!jwtService.isEmailActivationToken(activationToken)) {
+      throw new JwtAuthenticationException(Map.of("token", "Incorrect token"), "token error");
     }
+    userService.activateUserByEmail(jwtService.getEmailFromJwt(activationToken));
     return ResponseEntity.ok().build();
   }
 
@@ -102,16 +102,18 @@ public class AccountsController {
    * Account forgotten password change endpoint.
    *
    * @param passwordResetToken password reset token.
-   * @param newPassword New password.
+   * @param requestDto New password.
    * @return ok if done.
    */
   @PostMapping("/password/forgot/change/{passwordResetToken}")
   public ResponseEntity<HttpStatus> changeForgottenAccountPassword(
-      @PathVariable(value = "passwordResetToken") String passwordResetToken, String newPassword) {
-    if (jwtService.isPasswordForgottenToken(passwordResetToken)) {
-      userService.changeUserPasswordByEmail(
-          jwtService.getEmailFromJwt(passwordResetToken), newPassword);
+      @PathVariable(value = "passwordResetToken") String passwordResetToken,
+      @RequestBody AccountChangePasswordRequestDto requestDto) {
+    if (!jwtService.isPasswordForgottenToken(passwordResetToken)) {
+      throw new JwtAuthenticationException(Map.of("token", "Incorrect token"), "token error");
     }
+    userService.changeUserPasswordByEmail(
+        jwtService.getEmailFromJwt(passwordResetToken), requestDto.getNewPassword());
     return ResponseEntity.ok().build();
   }
 }

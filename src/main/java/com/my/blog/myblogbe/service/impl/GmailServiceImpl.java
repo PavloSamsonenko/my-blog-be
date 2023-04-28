@@ -28,8 +28,10 @@ public class GmailServiceImpl implements GmailService {
     sendMessage(
         userModel.getEmail(),
         "Activation link",
-        "localhost:3000/accounts/email/activation/"
-            + jwtService.createJwt(userModel.getEmail(), JwtTypeEnum.EMAIL_ACTIVATION));
+        "Please click here to activate your account:"
+            + " http://localhost:3000/account/email/activation/"
+            + jwtService.createJwt(userModel.getEmail(), JwtTypeEnum.EMAIL_ACTIVATION)
+            + ".\n Link will expire in 10 minutes.");
   }
 
   @Override
@@ -37,7 +39,9 @@ public class GmailServiceImpl implements GmailService {
     sendMessage(
         email,
         "Forgot your password?",
-        "localhost:3000/accounts/password/forget/"
-            + jwtService.createJwt(email, JwtTypeEnum.PASSWORD_FORGOT));
+        "Please click here to change your password:"
+            + "http://localhost:3000/account/password/forget/"
+            + jwtService.createJwt(email, JwtTypeEnum.PASSWORD_FORGOT)
+            + ".\n Link will expire in 10 minutes.");
   }
 }

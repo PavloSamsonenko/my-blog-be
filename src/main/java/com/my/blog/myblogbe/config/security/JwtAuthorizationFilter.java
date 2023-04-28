@@ -3,6 +3,7 @@ package com.my.blog.myblogbe.config.security;
 import com.my.blog.myblogbe.service.api.JwtService;
 import com.my.blog.myblogbe.service.api.UserService;
 import com.my.blog.myblogbe.service.model.SecurityUserModel;
+import com.my.blog.myblogbe.web.exceptions.model.IncorrectCredentialsException;
 import com.my.blog.myblogbe.web.exceptions.model.JwtAuthenticationException;
 import com.my.blog.myblogbe.web.exceptions.model.UserNotActivatedException;
 import jakarta.servlet.FilterChain;
@@ -29,7 +30,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
   protected void doFilterInternal(
       HttpServletRequest request, HttpServletResponse response, FilterChain chain)
       throws ServletException, IOException {
-    getAndAuthenticateUserFromJwt(getAndValideateJwtToken(request));
+    getAndAuthenticateUserFromJwt(getAndValidateJwtToken(request));
     chain.doFilter(request, response);
   }
 
@@ -39,10 +40,11 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
    * @param request HttpServletRequest.
    * @return Jwt token.
    */
-  private String getAndValideateJwtToken(HttpServletRequest request) {
+  private String getAndValidateJwtToken(HttpServletRequest request) {
     String authenticationHeader = request.getHeader(HEADER);
     if (authenticationHeader == null || !authenticationHeader.startsWith(PREFIX)) {
-      throw new JwtAuthenticationException(Map.of("token", "Jwt token required"), "Jwt error");
+      throw new JwtAuthenticationException(
+          Map.of("token", "Authorization jwt token required"), "Jwt error");
     }
     String jwt = authenticationHeader.replace(PREFIX, "");
     if (!jwtService.isAuthorizationToken(jwt)) {
@@ -58,16 +60,24 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
    * @param jwt Jwt token.
    */
   private void getAndAuthenticateUserFromJwt(String jwt) {
-    SecurityUserModel securityUserModel =
-        userService.getUserByEmail(jwtService.getEmailFromJwt(jwt));
-    if (!securityUserModel.isEnabled()) {
-      throw new UserNotActivatedException(
-          Map.of("email", "Please activate your account through email link"), "User not activated");
-    }
-    UsernamePasswordAuthenticationToken auth =
-        new UsernamePasswordAuthenticationToken(
-            securityUserModel, "", securityUserModel.getAuthorities());
+    try {
+      SecurityUserModel securityUserModel =
+          userService.getUserByEmail(jwtService.getEmailFromJwt(jwt));
 
-    SecurityContextHolder.getContext().setAuthentication(auth);
+      if (!securityUserModel.isEnabled()) {
+        throw new UserNotActivatedException(
+            Map.of("email", "Please activate your account through email link"),
+            "User not activated");
+      }
+      UsernamePasswordAuthenticationToken auth =
+          new UsernamePasswordAuthenticationToken(
+              securityUserModel, "", securityUserModel.getAuthorities());
+
+      SecurityContextHolder.getContext().setAuthentication(auth);
+    } catch (IncorrectCredentialsException e) {
+      throw new JwtAuthenticationException(
+          Map.of("token", "Jwt verification error"),
+          "Jwt error");
+    }
   }
 }
