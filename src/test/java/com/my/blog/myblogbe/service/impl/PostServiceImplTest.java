@@ -61,11 +61,6 @@ public class PostServiceImplTest {
   }
 
   @Test
-  void shouldFailAlways() {
-    assertEquals(1, 2);
-  }
-
-  @Test
   void testCreatePost() {
     String mockContent = "MockContent";
     PostEntity mockEntity = PostEntity.builder().content(mockContent).build();
