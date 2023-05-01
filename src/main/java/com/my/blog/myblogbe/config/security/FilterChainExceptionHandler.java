@@ -1,6 +1,5 @@
 package com.my.blog.myblogbe.config.security;
 
-
 import com.my.blog.myblogbe.web.exceptions.model.AbstractAnteikuException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -16,6 +15,7 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 /** Exception handler class for filters. */
 @Component
 public class FilterChainExceptionHandler extends OncePerRequestFilter {
+
   @Autowired
   @Qualifier("handlerExceptionResolver")
   private HandlerExceptionResolver resolver;

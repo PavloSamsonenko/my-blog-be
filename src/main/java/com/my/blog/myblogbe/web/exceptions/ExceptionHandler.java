@@ -16,6 +16,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+/** ExceptionHandler. */
 @RestControllerAdvice
 public class ExceptionHandler {
   private static final Map<Map<String, String>, String> CONSTRAINS_MAP =
@@ -26,8 +27,10 @@ public class ExceptionHandler {
           "Ключ (post_id)");
 
   /**
-   * @param exception - MethodArgumentNotValidException
-   * @return ResponseEntity<ApplicationExceptionResponseDto>
+   * Exception handler.
+   *
+   * @param exception - MethodArgumentNotValidException.
+   * @return ResponseEntity of ApplicationExceptionResponseDto.
    */
   @org.springframework.web.bind.annotation.ExceptionHandler(MethodArgumentNotValidException.class)
   public ResponseEntity<ApplicationExceptionResponseDto> handleException(
@@ -43,6 +46,12 @@ public class ExceptionHandler {
         "Input validation error", HttpStatus.UNPROCESSABLE_ENTITY, errors);
   }
 
+  /**
+   * Exception handler.
+   *
+   * @param exception DataIntegrityViolationException.
+   * @return ApplicationExceptionResponseDto.
+   */
   @org.springframework.web.bind.annotation.ExceptionHandler(DataIntegrityViolationException.class)
   public ResponseEntity<ApplicationExceptionResponseDto> handleException(
       DataIntegrityViolationException exception) {
@@ -56,8 +65,10 @@ public class ExceptionHandler {
         }
       }
     }
-    if (errors.isEmpty())
+    if (errors.isEmpty()) {
       errors.put("unknownError", "Unknown data operation error, please contact support");
+    }
+
     return buildResponseDtoAndGetResponseEntity(
         "Data operation error", HttpStatus.CONFLICT, errors);
   }

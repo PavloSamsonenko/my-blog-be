@@ -4,8 +4,8 @@ import com.my.blog.myblogbe.database.entity.posts.CommentaryEntity;
 import com.my.blog.myblogbe.database.entity.posts.PostEntity;
 import com.my.blog.myblogbe.database.repository.CommentaryRepository;
 import com.my.blog.myblogbe.database.repository.PostRepository;
-import com.my.blog.myblogbe.service.api.UserService;
 import com.my.blog.myblogbe.service.api.PostService;
+import com.my.blog.myblogbe.service.api.UserService;
 import com.my.blog.myblogbe.service.mappers.ServiceLayerMapper;
 import com.my.blog.myblogbe.service.model.post.CommentaryModel;
 import com.my.blog.myblogbe.service.model.post.PostModel;
@@ -14,6 +14,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+/** PostServiceImpl. */
 @Service
 @AllArgsConstructor
 public class PostServiceImpl implements PostService {

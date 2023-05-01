@@ -17,10 +17,15 @@ import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
-/** Mapper for web layer */
+/**
+ * Mapper for web layer.
+ */
 @Mapper(unmappedTargetPolicy = ReportingPolicy.WARN, builder = @Builder(disableBuilder = true))
 public interface WebLayerMapper {
-  /** Instance. */
+
+  /**
+   * Instance.
+   */
   WebLayerMapper I = Mappers.getMapper(WebLayerMapper.class);
 
   /**

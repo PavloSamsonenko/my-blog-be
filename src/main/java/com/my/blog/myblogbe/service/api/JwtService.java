@@ -28,6 +28,7 @@ public interface JwtService {
    * @return true or false
    */
   Boolean isAuthorizationToken(String jwt);
+
   /**
    * Check if token is email activation token.
    *

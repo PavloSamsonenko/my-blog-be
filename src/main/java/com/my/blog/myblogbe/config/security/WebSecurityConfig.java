@@ -1,6 +1,5 @@
 package com.my.blog.myblogbe.config.security;
 
-
 import com.my.blog.myblogbe.service.api.JwtService;
 import com.my.blog.myblogbe.service.api.UserService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +19,7 @@ public class WebSecurityConfig {
   private final JwtService jwtService;
   private final FilterChainExceptionHandler filterChainExceptionHandler;
 
-  /** Bean with SecurityFilterChain configuration */
+  /** Bean with SecurityFilterChain configuration. */
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.cors()
@@ -45,7 +44,7 @@ public class WebSecurityConfig {
     return http.build();
   }
 
-  /** Bean with WebSecurityCustomizer configuration */
+  /** Bean with WebSecurityCustomizer configuration. */
   @Bean
   public WebSecurityCustomizer webSecurityCustomizer() {
     return (web) ->

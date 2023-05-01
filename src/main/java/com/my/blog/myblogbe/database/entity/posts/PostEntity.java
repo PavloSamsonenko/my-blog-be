@@ -18,6 +18,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
+/**
+ * PostEntity.
+ */
 @Data
 @Table(name = "posts")
 @Entity

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 
+/** AbstractAnteikuException. */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

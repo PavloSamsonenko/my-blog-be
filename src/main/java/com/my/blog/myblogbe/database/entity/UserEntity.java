@@ -18,6 +18,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
+/**
+ * UserEntity.
+ */
 @Data
 @Table(name = "users")
 @Entity
@@ -53,6 +56,9 @@ public class UserEntity {
   @Column(name = "created_on")
   private LocalDateTime createdOn;
 
+  /**
+   * Roles.
+   */
   public enum Roles {
     ROLE_SUPERADMIN,
     ROLE_ADMIN,

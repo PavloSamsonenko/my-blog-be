@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+/** ApplicationExceptionResponseDto. */
 @Builder
 @EqualsAndHashCode
 @NoArgsConstructor

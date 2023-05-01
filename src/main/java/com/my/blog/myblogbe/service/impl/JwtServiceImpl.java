@@ -25,12 +25,14 @@ import java.util.Date;
 import java.util.Map;
 import org.springframework.stereotype.Service;
 
+/** JwtServiceImpl. */
 @Service
 public class JwtServiceImpl implements JwtService {
   private final byte[] secretKey = System.getenv("MyBlogJwtSecret").getBytes();
   private final ConfigurableJWTProcessor<SimpleSecurityContext> jwtProcessor =
       new DefaultJWTProcessor<>();
 
+  /** Init method. */
   @PostConstruct
   public void init() {
     JWKSource<SimpleSecurityContext> jweKeySource = new ImmutableSecret<>(secretKey);
@@ -75,29 +77,29 @@ public class JwtServiceImpl implements JwtService {
 
   @Override
   public String getEmailFromJwt(String jwt) {
-    return (String) getJWTClaimsSetFromToken(jwt).getClaim("email");
+    return (String) getJwtClaimsSetFromToken(jwt).getClaim("email");
   }
 
   @Override
   public Boolean isAuthorizationToken(String jwt) {
-    return getJWTClaimsSetFromToken(jwt).getClaim("type").equals(JwtTypeEnum.AUTHORIZATION.name());
+    return getJwtClaimsSetFromToken(jwt).getClaim("type").equals(JwtTypeEnum.AUTHORIZATION.name());
   }
 
   @Override
   public Boolean isEmailActivationToken(String jwt) {
-    return getJWTClaimsSetFromToken(jwt)
+    return getJwtClaimsSetFromToken(jwt)
         .getClaim("type")
         .equals(JwtTypeEnum.EMAIL_ACTIVATION.name());
   }
 
   @Override
   public Boolean isPasswordForgottenToken(String jwt) {
-    return getJWTClaimsSetFromToken(jwt)
+    return getJwtClaimsSetFromToken(jwt)
         .getClaim("type")
         .equals(JwtTypeEnum.PASSWORD_FORGOT.name());
   }
 
-  private JWTClaimsSet getJWTClaimsSetFromToken(String jwt) {
+  private JWTClaimsSet getJwtClaimsSetFromToken(String jwt) {
     try {
       return jwtProcessor.process(jwt, null);
     } catch (BadJOSEException e) {

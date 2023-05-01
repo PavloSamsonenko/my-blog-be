@@ -1,14 +1,14 @@
 package com.my.blog.myblogbe.web.dto.request.user;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * UserDataRequestDto.
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @Data

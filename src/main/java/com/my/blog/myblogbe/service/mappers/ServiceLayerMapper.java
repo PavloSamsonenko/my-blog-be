@@ -16,7 +16,7 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
-/** Mapper for service layer */
+/** Mapper for service layer. */
 @Mapper(unmappedTargetPolicy = ReportingPolicy.WARN, builder = @Builder(disableBuilder = true))
 public interface ServiceLayerMapper {
   /** Instance. */

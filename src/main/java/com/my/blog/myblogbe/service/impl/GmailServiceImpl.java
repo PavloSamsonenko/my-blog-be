@@ -9,6 +9,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+/** GmailServiceImpl. */
 @Service
 @RequiredArgsConstructor
 public class GmailServiceImpl implements GmailService {

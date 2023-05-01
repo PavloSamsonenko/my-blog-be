@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+/** UserServiceImpl. */
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -53,6 +54,12 @@ public class UserServiceImpl implements UserService {
                 userModel, userRepository.findById(getAuthenticatedUser().getId()).orElseThrow())));
   }
 
+  /**
+   * Method to check if password is correct.
+   *
+   * @param userModel userModel with credentials.
+   * @return UserModel.
+   */
   public boolean isCorrectPassword(UserModel userModel) {
     if (!passwordEncoder.matches(
         userModel.getPassword(), getUserByEmail(userModel.getEmail()).getPassword())) {

@@ -163,6 +163,19 @@
           </excludes>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>3.2.2</version>
+        <configuration>
+          <violationSeverity>warning</violationSeverity>
+          <failsOnError>true</failsOnError>
+          <failOnViolation>true</failOnViolation>
+          <consoleOutput>true</consoleOutput>
+          <encoding>UTF-8</encoding>
+          <configLocation>google_checks.xml</configLocation>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 

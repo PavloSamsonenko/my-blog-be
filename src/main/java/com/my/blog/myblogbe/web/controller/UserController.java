@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * UserController.
+ */
 @AllArgsConstructor
 @RestController
 @RequestMapping("/a/rest/user")
@@ -34,6 +37,12 @@ public class UserController {
         WebLayerMapper.I.userModelToResponseDto(userService.getAuthenticatedUser()));
   }
 
+  /**
+   * Change user data endpoint.
+   *
+   * @param requestDto UserDataRequestDto.
+   * @return AuthorizationTokenResponseDto.
+   */
   @PatchMapping("/data")
   @Operation(security = @SecurityRequirement(name = "Authorization"))
   public ResponseEntity<AuthorizationTokenResponseDto> changeUserData(
@@ -50,6 +59,12 @@ public class UserController {
             .build());
   }
 
+  /**
+   * Change user password endpoint.
+   *
+   * @param requestDto AccountChangePasswordRequestDto.
+   * @return ResponseEntity ofHttpStatus.
+   */
   @PatchMapping("/password")
   @Operation(security = @SecurityRequirement(name = "Authorization"))
   public ResponseEntity<HttpStatus> changeUserPassword(

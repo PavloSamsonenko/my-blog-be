@@ -10,6 +10,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+/**
+ * SecurityUserModel.
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -58,7 +61,8 @@ public class SecurityUserModel implements UserDetails {
     return enabled;
   }
 
-  public static enum Roles implements GrantedAuthority {
+  /** Roles. */
+  public enum Roles implements GrantedAuthority {
     ROLE_SUPERADMIN,
     ROLE_ADMIN,
     ROLE_USER;

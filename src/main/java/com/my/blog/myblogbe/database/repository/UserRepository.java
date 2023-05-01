@@ -9,8 +9,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+/**
+ * UserRepository.
+ */
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, String> {
+
   Optional<UserEntity> getUserEntityByEmail(String email);
 
   @Transactional

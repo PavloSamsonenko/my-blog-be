@@ -26,6 +26,10 @@ jobs:
       - run:
           name: Test
           command: mvn test
+      # Then run checkstyle!
+      - run:
+          name: CheckStyle
+          command: mvn checkstyle:check
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows

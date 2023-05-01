@@ -6,9 +6,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-/** Configuration class for CORS`es */
+/** Configuration class for CORS`es. */
 @Configuration
-public class CORSConfig {
+public class CorsConfig {
   @Value("${app.security.web.cors.allow.origin}")
   private String corsUrl;
 

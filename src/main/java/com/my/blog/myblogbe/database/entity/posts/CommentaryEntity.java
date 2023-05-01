@@ -16,6 +16,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
+/**
+ * CommentaryEntity.
+ */
 @Data
 @Table(name = "commentary")
 @Entity
