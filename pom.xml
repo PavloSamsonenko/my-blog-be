@@ -23,6 +23,10 @@
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <org.maven-compiler-plugin.version>3.8.1</org.maven-compiler-plugin.version>
+    <maven-checkstyle-plugin.version>3.2.2</maven-checkstyle-plugin.version>
+    <spring-boot-maven-plugin.version>2.7.4</spring-boot-maven-plugin.version>
+    <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
+    <sonar-maven-plugin.version>3.4.0.905</sonar-maven-plugin.version>
   </properties>
 
   <dependencyManagement>
@@ -141,12 +145,12 @@
     <plugins>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0</version>
+        <version>${maven-surefire-plugin.version}</version>
       </plugin>
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>2.7.4</version>
+        <version>${spring-boot-maven-plugin.version}</version>
         <executions>
           <execution>
             <goals>
@@ -166,7 +170,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>3.2.2</version>
+        <version>${maven-checkstyle-plugin.version}</version>
         <configuration>
           <violationSeverity>warning</violationSeverity>
           <failsOnError>true</failsOnError>
@@ -175,6 +179,24 @@
           <encoding>UTF-8</encoding>
           <configLocation>google_checks.xml</configLocation>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.sonarsource.scanner.maven</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>${sonar-maven-plugin.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>4.7.2.1</version>
+        <dependencies>
+          <!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
+          <dependency>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs</artifactId>
+            <version>4.7.3</version>
+          </dependency>
+        </dependencies>
       </plugin>
     </plugins>
   </build>
