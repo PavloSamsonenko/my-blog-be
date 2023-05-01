@@ -1,9 +1,7 @@
-package com.my.blog.myblogbe.service.model;
+package com.my.blog.myblogbe.service.impl.model;
 
-import com.my.blog.myblogbe.database.entity.posts.PostEntity;
-import com.my.blog.myblogbe.service.model.SecurityUserModel.Roles;
+import com.my.blog.myblogbe.service.impl.model.SecurityUserModel.Roles;
 import java.time.LocalDateTime;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

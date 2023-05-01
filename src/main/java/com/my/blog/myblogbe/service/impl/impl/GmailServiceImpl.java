@@ -1,9 +1,9 @@
-package com.my.blog.myblogbe.service.impl;
+package com.my.blog.myblogbe.service.impl.impl;
 
-import com.my.blog.myblogbe.service.api.GmailService;
-import com.my.blog.myblogbe.service.api.JwtService;
-import com.my.blog.myblogbe.service.model.UserModel;
-import com.my.blog.myblogbe.service.model.enums.JwtTypeEnum;
+import com.my.blog.myblogbe.service.impl.api.GmailService;
+import com.my.blog.myblogbe.service.impl.api.JwtService;
+import com.my.blog.myblogbe.service.impl.model.UserModel;
+import com.my.blog.myblogbe.service.impl.model.enums.JwtTypeEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

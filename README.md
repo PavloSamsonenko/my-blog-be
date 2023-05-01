@@ -20,6 +20,7 @@ MyBlog backend application
    MyBlogJwtSecret - Generated jwt secret using aes-128-cbc (example online tool - https://encode-decode.com/aes-128-cbc-encrypt-online/)
 
    MyBlogPostgrePassword - Postgres user password
+
    MyBlogPostgreUrl - Postgres db Url(example jdbc:postgresql://localhost:5432/myblog_db)
 
    MyBlogPostgreUser - Postgres username

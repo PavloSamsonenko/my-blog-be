@@ -1,6 +1,6 @@
-package com.my.blog.myblogbe.service.model.post;
+package com.my.blog.myblogbe.service.impl.model.post;
 
-import com.my.blog.myblogbe.service.model.UserModel;
+import com.my.blog.myblogbe.service.impl.model.UserModel;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;

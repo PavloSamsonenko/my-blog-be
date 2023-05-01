@@ -1,8 +1,8 @@
 package com.my.blog.myblogbe.web.controller;
 
-import com.my.blog.myblogbe.service.api.JwtService;
-import com.my.blog.myblogbe.service.api.UserService;
-import com.my.blog.myblogbe.service.model.enums.JwtTypeEnum;
+import com.my.blog.myblogbe.service.impl.api.JwtService;
+import com.my.blog.myblogbe.service.impl.api.UserService;
+import com.my.blog.myblogbe.service.impl.model.enums.JwtTypeEnum;
 import com.my.blog.myblogbe.web.dto.request.account.AccountChangePasswordRequestDto;
 import com.my.blog.myblogbe.web.dto.request.user.UserDataRequestDto;
 import com.my.blog.myblogbe.web.dto.response.AuthorizationTokenResponseDto;

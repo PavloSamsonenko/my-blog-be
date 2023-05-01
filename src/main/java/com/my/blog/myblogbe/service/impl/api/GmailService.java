@@ -1,7 +1,7 @@
-package com.my.blog.myblogbe.service.api;
+package com.my.blog.myblogbe.service.impl.api;
 
 
-import com.my.blog.myblogbe.service.model.UserModel;
+import com.my.blog.myblogbe.service.impl.model.UserModel;
 
 public interface GmailService {
     void sendAccountActivationLink(UserModel userModel);

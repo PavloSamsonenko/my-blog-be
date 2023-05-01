@@ -1,8 +1,8 @@
 package com.my.blog.myblogbe.web.mappers;
 
-import com.my.blog.myblogbe.service.model.UserModel;
-import com.my.blog.myblogbe.service.model.post.CommentaryModel;
-import com.my.blog.myblogbe.service.model.post.PostModel;
+import com.my.blog.myblogbe.service.impl.model.UserModel;
+import com.my.blog.myblogbe.service.impl.model.post.CommentaryModel;
+import com.my.blog.myblogbe.service.impl.model.post.PostModel;
 import com.my.blog.myblogbe.web.dto.request.account.AccountCredentialsRequestDto;
 import com.my.blog.myblogbe.web.dto.request.account.AccountLoginRequestDto;
 import com.my.blog.myblogbe.web.dto.request.post.CommentaryRequestDto;

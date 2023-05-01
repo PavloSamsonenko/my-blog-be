@@ -1,8 +1,8 @@
 package com.my.blog.myblogbe.config.security;
 
-import com.my.blog.myblogbe.service.api.JwtService;
-import com.my.blog.myblogbe.service.api.UserService;
-import com.my.blog.myblogbe.service.model.SecurityUserModel;
+import com.my.blog.myblogbe.service.impl.api.JwtService;
+import com.my.blog.myblogbe.service.impl.api.UserService;
+import com.my.blog.myblogbe.service.impl.model.SecurityUserModel;
 import com.my.blog.myblogbe.web.exceptions.model.IncorrectCredentialsException;
 import com.my.blog.myblogbe.web.exceptions.model.JwtAuthenticationException;
 import com.my.blog.myblogbe.web.exceptions.model.UserNotActivatedException;

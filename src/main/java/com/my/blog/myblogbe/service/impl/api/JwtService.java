@@ -1,6 +1,6 @@
-package com.my.blog.myblogbe.service.api;
+package com.my.blog.myblogbe.service.impl.api;
 
-import com.my.blog.myblogbe.service.model.enums.JwtTypeEnum;
+import com.my.blog.myblogbe.service.impl.model.enums.JwtTypeEnum;
 
 /** Interface for Jwt operations. */
 public interface JwtService {

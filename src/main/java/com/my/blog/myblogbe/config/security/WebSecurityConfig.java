@@ -1,8 +1,8 @@
 package com.my.blog.myblogbe.config.security;
 
 
-import com.my.blog.myblogbe.service.api.JwtService;
-import com.my.blog.myblogbe.service.api.UserService;
+import com.my.blog.myblogbe.service.impl.api.JwtService;
+import com.my.blog.myblogbe.service.impl.api.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,12 +1,12 @@
-package com.my.blog.myblogbe.service.mappers;
+package com.my.blog.myblogbe.service.impl.mappers;
 
 import com.my.blog.myblogbe.database.entity.UserEntity;
 import com.my.blog.myblogbe.database.entity.posts.CommentaryEntity;
 import com.my.blog.myblogbe.database.entity.posts.PostEntity;
-import com.my.blog.myblogbe.service.model.SecurityUserModel;
-import com.my.blog.myblogbe.service.model.UserModel;
-import com.my.blog.myblogbe.service.model.post.CommentaryModel;
-import com.my.blog.myblogbe.service.model.post.PostModel;
+import com.my.blog.myblogbe.service.impl.model.SecurityUserModel;
+import com.my.blog.myblogbe.service.impl.model.UserModel;
+import com.my.blog.myblogbe.service.impl.model.post.CommentaryModel;
+import com.my.blog.myblogbe.service.impl.model.post.PostModel;
 import java.util.List;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Builder;
