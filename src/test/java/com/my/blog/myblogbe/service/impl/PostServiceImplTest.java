@@ -61,6 +61,11 @@ public class PostServiceImplTest {
   }
 
   @Test
+  void shouldFailAlways() {
+    assertEquals(1, 2);
+  }
+
+  @Test
   void testCreatePost() {
     String mockContent = "MockContent";
     PostEntity mockEntity = PostEntity.builder().content(mockContent).build();
@@ -69,8 +74,7 @@ public class PostServiceImplTest {
     when(postRepository.save(any())).thenReturn(mockEntity);
     when(userService.getAuthenticatedUser()).thenReturn(mockUserModel);
     PostModel mockPost = PostModel.builder().content(mockContent).build();
-    PostModel expectedResult =
-        PostModel.builder().content(mockContent).build();
+    PostModel expectedResult = PostModel.builder().content(mockContent).build();
     PostModel actualResult = postService.createPost(mockPost);
     assertEquals(actualResult, expectedResult);
   }
