@@ -23,24 +23,6 @@ public class UserServiceImpl implements UserService {
   private final UserRepository userRepository;
   private final PasswordEncoder passwordEncoder;
 
-  // Add preload users for testing
-  @PostConstruct
-  public void init() {
-    if (userRepository.getUserEntityByEmail("test@test").isEmpty()) {
-      UserEntity testUser =
-          ServiceLayerMapper.I.userModelToEntity(
-              UserModel.builder()
-                  .email("test@test")
-                  .password(passwordEncoder.encode("test"))
-                  .username("test")
-                  .createdOn(LocalDateTime.now())
-                  .enabled(true)
-                  .role(SecurityUserModel.Roles.ROLE_USER)
-                  .build());
-      userRepository.save(testUser);
-    }
-  }
-
   @Override
   public SecurityUserModel getUserByEmail(String email) {
     return ServiceLayerMapper.I.userEntityToSecurityUserModel(
