@@ -1,14 +1,14 @@
-package com.my.blog.myblogbe.service.impl.impl;
+package com.my.blog.myblogbe.service.impl;
 
 import com.my.blog.myblogbe.database.entity.posts.CommentaryEntity;
 import com.my.blog.myblogbe.database.entity.posts.PostEntity;
 import com.my.blog.myblogbe.database.repository.CommentaryRepository;
 import com.my.blog.myblogbe.database.repository.PostRepository;
-import com.my.blog.myblogbe.service.impl.api.PostService;
-import com.my.blog.myblogbe.service.impl.api.UserService;
-import com.my.blog.myblogbe.service.impl.mappers.ServiceLayerMapper;
-import com.my.blog.myblogbe.service.impl.model.post.CommentaryModel;
-import com.my.blog.myblogbe.service.impl.model.post.PostModel;
+import com.my.blog.myblogbe.service.api.UserService;
+import com.my.blog.myblogbe.service.api.PostService;
+import com.my.blog.myblogbe.service.mappers.ServiceLayerMapper;
+import com.my.blog.myblogbe.service.model.post.CommentaryModel;
+import com.my.blog.myblogbe.service.model.post.PostModel;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;

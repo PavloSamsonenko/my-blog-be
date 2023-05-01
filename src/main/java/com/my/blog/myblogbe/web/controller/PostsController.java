@@ -1,6 +1,6 @@
 package com.my.blog.myblogbe.web.controller;
 
-import com.my.blog.myblogbe.service.impl.api.PostService;
+import com.my.blog.myblogbe.service.api.PostService;
 import com.my.blog.myblogbe.web.dto.request.post.CommentaryRequestDto;
 import com.my.blog.myblogbe.web.dto.request.post.PostRequestDto;
 import com.my.blog.myblogbe.web.dto.response.post.CommentaryResponseDto;

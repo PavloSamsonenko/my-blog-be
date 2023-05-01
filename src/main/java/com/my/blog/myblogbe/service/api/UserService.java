@@ -1,7 +1,7 @@
-package com.my.blog.myblogbe.service.impl.api;
+package com.my.blog.myblogbe.service.api;
 
-import com.my.blog.myblogbe.service.impl.model.SecurityUserModel;
-import com.my.blog.myblogbe.service.impl.model.UserModel;
+import com.my.blog.myblogbe.service.model.SecurityUserModel;
+import com.my.blog.myblogbe.service.model.UserModel;
 
 /** Interface for user operations. */
 public interface UserService {

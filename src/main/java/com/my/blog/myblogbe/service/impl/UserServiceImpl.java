@@ -1,10 +1,10 @@
-package com.my.blog.myblogbe.service.impl.impl;
+package com.my.blog.myblogbe.service.impl;
 
 import com.my.blog.myblogbe.database.repository.UserRepository;
-import com.my.blog.myblogbe.service.impl.api.UserService;
-import com.my.blog.myblogbe.service.impl.mappers.ServiceLayerMapper;
-import com.my.blog.myblogbe.service.impl.model.SecurityUserModel;
-import com.my.blog.myblogbe.service.impl.model.UserModel;
+import com.my.blog.myblogbe.service.api.UserService;
+import com.my.blog.myblogbe.service.mappers.ServiceLayerMapper;
+import com.my.blog.myblogbe.service.model.SecurityUserModel;
+import com.my.blog.myblogbe.service.model.UserModel;
 import com.my.blog.myblogbe.web.exceptions.model.IncorrectCredentialsException;
 import java.time.LocalDateTime;
 import java.util.Map;

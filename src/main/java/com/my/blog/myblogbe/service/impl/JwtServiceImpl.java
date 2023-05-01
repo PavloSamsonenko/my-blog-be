@@ -1,7 +1,7 @@
-package com.my.blog.myblogbe.service.impl.impl;
+package com.my.blog.myblogbe.service.impl;
 
-import com.my.blog.myblogbe.service.impl.api.JwtService;
-import com.my.blog.myblogbe.service.impl.model.enums.JwtTypeEnum;
+import com.my.blog.myblogbe.service.api.JwtService;
+import com.my.blog.myblogbe.service.model.enums.JwtTypeEnum;
 import com.my.blog.myblogbe.web.exceptions.model.JwtAuthenticationException;
 import com.nimbusds.jose.EncryptionMethod;
 import com.nimbusds.jose.JOSEException;

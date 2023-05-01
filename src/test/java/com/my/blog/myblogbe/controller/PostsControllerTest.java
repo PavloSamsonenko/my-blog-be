@@ -7,9 +7,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.my.blog.myblogbe.service.impl.api.PostService;
-import com.my.blog.myblogbe.service.impl.model.post.CommentaryModel;
-import com.my.blog.myblogbe.service.impl.model.post.PostModel;
+import com.my.blog.myblogbe.service.api.PostService;
+import com.my.blog.myblogbe.service.model.post.CommentaryModel;
+import com.my.blog.myblogbe.service.model.post.PostModel;
 import com.my.blog.myblogbe.web.controller.PostsController;
 import com.my.blog.myblogbe.web.dto.request.post.CommentaryRequestDto;
 import com.my.blog.myblogbe.web.dto.request.post.PostRequestDto;

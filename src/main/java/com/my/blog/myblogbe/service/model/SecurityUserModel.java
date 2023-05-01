@@ -1,4 +1,4 @@
-package com.my.blog.myblogbe.service.impl.model;
+package com.my.blog.myblogbe.service.model;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
