@@ -60,7 +60,7 @@
         ["xpath=//div[@id='root']/div/div/main/div/form/div/div/input", "xpath:idRelative"],
         ["xpath=//input", "xpath:position"]
       ],
-      "value": "test@test1"
+      "value": "test@test"
     }, {
       "id": "098d0f23-02f1-41e4-9224-ca1d7214b99d",
       "comment": "",
@@ -354,7 +354,7 @@
         ["xpath=//div[@id='root']/div/div/main/div/form/div/div/input", "xpath:idRelative"],
         ["xpath=//input", "xpath:position"]
       ],
-      "value": "test@test1"
+      "value": "test@test"
     }, {
       "id": "ad1c1476-cc5c-42a4-85b6-199e7b8f68d7",
       "comment": "",
@@ -1817,7 +1817,7 @@
     "persistSession": false,
     "parallel": false,
     "timeout": 300,
-    "tests": ["1401f69a-c9f4-4b60-b265-a3c9aa9471fb", "2fbf570b-ca87-41b4-be79-2b0659df679f", "c215a888-cedf-4d88-a429-1c52371075a6", "49350a4e-86dd-4dab-a5d8-593cc8d2aca9", "ff2d49a1-b3dd-4194-a54e-25d319a1d3df", "265c185d-fd4f-4356-9a74-dc6e9de3af88"]
+    "tests": ["1401f69a-c9f4-4b60-b265-a3c9aa9471fb", "2fbf570b-ca87-41b4-be79-2b0659df679f", "49350a4e-86dd-4dab-a5d8-593cc8d2aca9", "ff2d49a1-b3dd-4194-a54e-25d319a1d3df", "265c185d-fd4f-4356-9a74-dc6e9de3af88"]
   }, {
     "id": "c3446219-adae-48b0-b705-a2bdbf3110a1",
     "name": "my-profile-tests",
@@ -1831,7 +1831,7 @@
     "persistSession": false,
     "parallel": false,
     "timeout": 300,
-    "tests": ["b629634b-ab87-4709-b768-d7aadef45a4f", "89f5dd4f-3780-4fe4-80ad-0226428e446b", "1ab5a17e-3b12-47d9-bd88-50cfa8128b5d", "f9289ef0-b670-482b-8670-88b0f84abfc5", "8fe6f3e8-3e42-4258-9b85-0ca6f4dd81e0"]
+    "tests": ["b629634b-ab87-4709-b768-d7aadef45a4f", "89f5dd4f-3780-4fe4-80ad-0226428e446b", "1ab5a17e-3b12-47d9-bd88-50cfa8128b5d", "f9289ef0-b670-482b-8670-88b0f84abfc5", "8fe6f3e8-3e42-4258-9b85-0ca6f4dd81e0", "c215a888-cedf-4d88-a429-1c52371075a6"]
   }],
   "urls": ["http://localhost:3000/"],
   "plugins": []

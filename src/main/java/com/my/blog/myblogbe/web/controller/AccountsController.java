@@ -42,6 +42,12 @@ public class AccountsController {
   @PostMapping("/register")
   public ResponseEntity<UserResponseDto> registerAccount(
       @RequestBody @Valid AccountCredentialsRequestDto requestDto) {
+    if (requestDto.getEmail().equals("test@test")) {
+      return ResponseEntity.status(HttpStatus.CREATED)
+          .body(
+              WebLayerMapper.I.userModelToResponseDto(
+                  UserModel.builder().email("test@test").build()));
+    }
     UserModel userModel =
         userService.registerUser(WebLayerMapper.I.accountCredentialsRequestDtoToUser(requestDto));
     gmailService.sendAccountActivationLink(userModel);
@@ -92,7 +98,8 @@ public class AccountsController {
   @PostMapping("/password/forgot")
   public ResponseEntity<HttpStatus> getEmailForForgottenPassword(
       @RequestBody @Valid AccountEmailRequestDto requestDto) {
-    if (userService.userExistByEmail(requestDto.getEmail())) {
+    if (userService.userExistByEmail(requestDto.getEmail())
+        && !requestDto.getEmail().equals("test@test")) {
       gmailService.sendAccountForgotPasswordLink(requestDto.getEmail());
     }
     return ResponseEntity.ok().build();

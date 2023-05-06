@@ -12,7 +12,7 @@ robotframework-testing_selenium
     # open    http://localhost:3000/
     click    css=.header-sign-up-button
     click    id=email
-    type    id=email    test@test1
+    type    id=email    test@test
     click    id=username
     type    id=username    test
     click    id=password

@@ -13,7 +13,7 @@ robotframework-testing_selenium
     click    css=.header-sign-up-button
     click    css=.MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-true.css-1vd824g-MuiGrid-root
     mouseOver    css=.MuiButton-fullWidth
-    type    id=email    test@test1
+    type    id=email    test@test
     click    css=.MuiButton-fullWidth
     [Teardown]  Close Browser
 

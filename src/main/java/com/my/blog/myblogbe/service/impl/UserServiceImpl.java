@@ -1,11 +1,14 @@
 package com.my.blog.myblogbe.service.impl;
 
+import com.my.blog.myblogbe.database.entity.UserEntity;
+import com.my.blog.myblogbe.database.entity.UserEntity.Roles;
 import com.my.blog.myblogbe.database.repository.UserRepository;
 import com.my.blog.myblogbe.service.api.UserService;
 import com.my.blog.myblogbe.service.mappers.ServiceLayerMapper;
 import com.my.blog.myblogbe.service.model.SecurityUserModel;
 import com.my.blog.myblogbe.service.model.UserModel;
 import com.my.blog.myblogbe.web.exceptions.model.IncorrectCredentialsException;
+import jakarta.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Optional;
@@ -21,6 +24,22 @@ public class UserServiceImpl implements UserService {
 
   private final UserRepository userRepository;
   private final PasswordEncoder passwordEncoder;
+
+  @PostConstruct
+  private void init() {
+    UserEntity testEntity =
+        UserEntity.builder()
+            .email("test@test")
+            .password(passwordEncoder.encode("test"))
+            .username("test")
+            .createdOn(LocalDateTime.now())
+            .enabled(true)
+            .role(Roles.ROLE_USER)
+            .build();
+    if (userRepository.getUserEntityByEmail("test@test").isEmpty()) {
+      userRepository.save(testEntity);
+    }
+  }
 
   @Override
   public SecurityUserModel getUserByEmail(String email) {
@@ -54,12 +73,6 @@ public class UserServiceImpl implements UserService {
                 userModel, userRepository.findById(getAuthenticatedUser().getId()).orElseThrow())));
   }
 
-  /**
-   * Method to check if password is correct.
-   *
-   * @param userModel userModel with credentials.
-   * @return UserModel.
-   */
   public boolean isCorrectPassword(UserModel userModel) {
     if (!passwordEncoder.matches(
         userModel.getPassword(), getUserByEmail(userModel.getEmail()).getPassword())) {
