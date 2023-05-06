@@ -2,7 +2,10 @@ package selenium.PreAuthorizationTest;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,11 +27,14 @@ public class PreAuthorizationTests {
   }
 
   @Test
-  public void testSignUpFail() {
+  public void testSignUpFail() throws IOException {
     driver.get("http://localhost:3000/");
     driver.findElement(By.cssSelector(".header-sign-up-button")).click();
+    takeScreenshot("scr1.png");
     driver.findElement(By.cssSelector("#root > div > div")).click();
+    takeScreenshot("scr2.png");
     driver.findElement(By.cssSelector(".MuiButton-fullWidth")).click();
+    takeScreenshot("scr3.png");
     driver.close();
   }
 
@@ -87,6 +93,15 @@ public class PreAuthorizationTests {
     driver.findElement(By.id("password")).click();
     driver.findElement(By.id("password")).sendKeys("test");
     driver.findElement(By.cssSelector(".MuiButton-fullWidth")).click();
+  }
+
+  private void takeScreenshot(String screenName) throws IOException {
+    TakesScreenshot screenshot = ((TakesScreenshot) driver);
+    File SrcFile = screenshot.getScreenshotAs(OutputType.FILE);
+
+    File DestFile = new File("src/test/java/selenium/MyProfileTests/screenshots/" + screenName);
+
+    FileUtils.copyFile(SrcFile, DestFile);
   }
 
   @AfterEach
