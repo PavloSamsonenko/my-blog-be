@@ -28,6 +28,7 @@
     <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
     <sonar-maven-plugin.version>3.4.0.905</sonar-maven-plugin.version>
     <selenium-java.version>4.8.1</selenium-java.version>
+    <cucumber-java.version>7.12.0</cucumber-java.version>
   </properties>
 
   <dependencyManagement>
@@ -127,12 +128,6 @@
       <version>${org.commons-io.version}</version>
     </dependency>
 
-    <dependency>
-      <groupId>org.seleniumhq.selenium</groupId>
-      <artifactId>selenium-java</artifactId>
-      <version>${selenium-java.version}</version>
-    </dependency>
-
     <!-- Test dependencies -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -146,6 +141,35 @@
       <version>${org.mockito-inline.version}</version>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <version>${selenium-java.version}</version>
+    </dependency>
+
+
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-java</artifactId>
+      <version>${cucumber-java.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-junit-platform-engine</artifactId>
+      <version>${cucumber-java.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-spring</artifactId>
+      <version>${cucumber-java.version}</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -156,7 +180,9 @@
         <configuration>
           <excludes>
             <!--            Exclude selenium tests from auto build-->
-            <exclude>/**/selenium/**/*.java</exclude>
+            <exclude>/**/selenium/**</exclude>
+            <!--            Exclude cucumber tests from auto build-->
+            <exclude>/**/cucumber/**</exclude>
           </excludes>
         </configuration>
       </plugin>
