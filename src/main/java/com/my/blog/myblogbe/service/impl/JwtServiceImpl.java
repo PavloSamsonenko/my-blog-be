@@ -20,6 +20,7 @@ import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.proc.ConfigurableJWTProcessor;
 import com.nimbusds.jwt.proc.DefaultJWTProcessor;
 import jakarta.annotation.PostConstruct;
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.Map;
@@ -28,7 +29,7 @@ import org.springframework.stereotype.Service;
 /** JwtServiceImpl. */
 @Service
 public class JwtServiceImpl implements JwtService {
-  private final byte[] secretKey = System.getenv("MyBlogJwtSecret").getBytes();
+  private final byte[] secretKey = System.getenv("MyBlogJwtSecret").getBytes(StandardCharsets.UTF_8);
   private final ConfigurableJWTProcessor<SimpleSecurityContext> jwtProcessor =
       new DefaultJWTProcessor<>();
 

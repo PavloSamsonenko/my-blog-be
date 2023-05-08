@@ -162,6 +162,23 @@
       <version>${cucumber-java.version}</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.github.spotbugs</groupId>
+      <artifactId>spotbugs</artifactId>
+      <version>4.7.3</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.github.spotbugs/spotbugs-annotations -->
+    <dependency>
+      <groupId>com.github.spotbugs</groupId>
+      <artifactId>spotbugs-annotations</artifactId>
+      <version>4.7.3</version>
+    </dependency>
+    <dependency>
+      <groupId>net.jcip</groupId>
+      <artifactId>jcip-annotations</artifactId>
+      <version>1.0</version>
+      <optional>true</optional>
+    </dependency>
 
 
     <dependency>
@@ -227,14 +244,6 @@
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>
         <version>4.7.2.1</version>
-        <dependencies>
-          <!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
-          <dependency>
-            <groupId>com.github.spotbugs</groupId>
-            <artifactId>spotbugs</artifactId>
-            <version>4.7.3</version>
-          </dependency>
-        </dependencies>
       </plugin>
     </plugins>
   </build>

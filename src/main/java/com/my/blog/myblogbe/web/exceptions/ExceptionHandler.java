@@ -55,18 +55,21 @@ public class ExceptionHandler {
   @org.springframework.web.bind.annotation.ExceptionHandler(DataIntegrityViolationException.class)
   public ResponseEntity<ApplicationExceptionResponseDto> handleException(
       DataIntegrityViolationException exception) {
-    String rootMsg = exception.getRootCause().getMessage();
     Map<String, String> errors = new HashMap<>();
-    if (rootMsg != null) {
-      for (Map.Entry<Map<String, String>, String> entry : CONSTRAINS_MAP.entrySet()) {
-        if (rootMsg.contains(entry.getValue())) {
-          Map.Entry<String, String> errorsMap = entry.getKey().entrySet().iterator().next();
-          errors.put(errorsMap.getKey(), errorsMap.getValue());
+    Throwable buff = exception.getRootCause();
+    if (buff != null) {
+      String rootMsg = buff.getMessage();
+      if (rootMsg != null) {
+        for (Map.Entry<Map<String, String>, String> entry : CONSTRAINS_MAP.entrySet()) {
+          if (rootMsg.contains(entry.getValue())) {
+            Map.Entry<String, String> errorsMap = entry.getKey().entrySet().iterator().next();
+            errors.put(errorsMap.getKey(), errorsMap.getValue());
+          }
         }
       }
-    }
-    if (errors.isEmpty()) {
-      errors.put("unknownError", "Unknown data operation error, please contact support");
+      if (errors.isEmpty()) {
+        errors.put("unknownError", "Unknown data operation error, please contact support");
+      }
     }
 
     return buildResponseDtoAndGetResponseEntity(
